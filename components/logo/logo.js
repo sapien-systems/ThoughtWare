@@ -4,12 +4,12 @@ import { Image, View } from 'react-native';
 export default function Logo() {
 	return (
 		<>
-			<View>
+			<View style={{backgroundColor:'black', justifyContent: 'center', alignItems:'center'}}>
 				<Image
           style={{
-						width: '100%',
+						width: '80%',
 						height: 50,
-						resizeMode: 'center',
+						resizeMode: 'cover',
 						backgroundColor: '#000000'
           }}
           source={require("../../assets/thoughtware.png")}
