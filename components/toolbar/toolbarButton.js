@@ -1,12 +1,22 @@
 import { SafeAreaView, View, StyleSheet, Dimensions } from 'react-native'
 import { getToolbarActions } from './toolbarActions';
 import { FloatingAction } from '../floatingAction';
+import customEvents from '../../hook/customEvents';
+import { ADD_NEW_DRAGGABLE } from '../../hook/customEventActions';
 
 export default function ToolbarButton({index}) {
 
 	const buttonSize = Dimensions.get('window').width / 4 ; 
 	const iconWidth = Dimensions.get('window').width / 4 ;
 	const actions = getToolbarActions(index, iconWidth * 3 / 5);
+
+	const onPressFloatingItem = (name) => {
+		console.log(`onPressFloatingItem: ${name}`);
+		const selected = actions.filter(action => action.name == name);
+		if (selected.length > 0) {
+			customEvents.emit(ADD_NEW_DRAGGABLE, selected[0]);
+		}
+	}
 
 	return (
 		<>
@@ -24,6 +34,7 @@ export default function ToolbarButton({index}) {
 						position='center'
 						color='transparent'
 						openOnMount={false}
+						onPressItem={onPressFloatingItem}
 						// actionsPaddingTopBottom={0}
 						showBackground={false}
 						floatingIcon={actions[0].icon}

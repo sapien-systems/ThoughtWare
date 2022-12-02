@@ -136,7 +136,6 @@ export default function Draggable(props) {
 				Number.isFinite(maxY) ? maxY - bottom : far,
 			);
 			pan.current.setValue({x: changeX, y: changeY});
-			console.log(`startBounds=${JSON.stringify(startBounds.current)} dx: ${changeX} dy: ${changeY}`);
 			onDrag(e, gestureState);
 		},
 		[maxX, maxY, minX, minY, onDrag],
@@ -221,7 +220,7 @@ export default function Draggable(props) {
 			if (isReverted) {
 				return (
 					<Image
-						style={{width: renderSize, height: renderSize}}
+						style={{ resizeMode:'contain', width: renderSize, height: renderSize, opacity:0.5}}
 						source={imageRevertSource}
 					/>
 				);
@@ -229,7 +228,7 @@ export default function Draggable(props) {
 			else {
 				return (
 					<Image
-						style={{width: renderSize, height: renderSize}}
+						style={{resizeMode:'contain', width: renderSize, height: renderSize, opacity:0.5}}
 						source={imageSource}
 					/>
 				);
@@ -237,7 +236,7 @@ export default function Draggable(props) {
 		} else if (imageSource) {
 			return (
 				<Image
-					style={{width: renderSize, height: renderSize}}
+					style={{resizeMode:'contain', width: renderSize, height: renderSize, opacity:0.5}}
 					source={imageSource}
 				/>
 			);

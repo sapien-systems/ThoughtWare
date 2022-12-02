@@ -1,8 +1,8 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { View } from 'react-native';
-import { Draggable } from '../draggable';
+import { Draggable } from '.';
 
-export function DragCanvas({bounds}) {
+export function CustomDraggable({bounds, data}) {
 
     const predefinedSize = [70, 100, 150];
     const [draggableSize, setDraggableSize] = useState(predefinedSize[0]);
@@ -16,12 +16,16 @@ export function DragCanvas({bounds}) {
         }
     }
 
+    useEffect(() => {
+        console.log(`CustomDraggable is called. ${JSON.stringify(data)}`);
+    }, [])
+
     return (
         <Draggable 
             x={bounds.width/2} y={bounds.height/2} 
             renderSize={draggableSize}
-            imageSource={require('../../assets/pent-black.png')} 
-            imageRevertSource={require('../../assets/pent-white.png')}
+            imageSource={data.icon} 
+            imageRevertSource={data.iconRevert}
             minX={bounds.x}
             minY={bounds.y}
             maxX={bounds.x + bounds.width}

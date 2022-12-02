@@ -1,7 +1,8 @@
 import { Box, Button, VStack } from "@react-native-material/core";
 import { useState } from "react";
 import { Image, View, StyleSheet } from 'react-native';
-import { DragCanvas } from "./dragcanvas";
+import { CustomDraggable } from "../draggable/customDraggable";
+import { DrawCanvas } from "./drawCanvas";
 
 export default function Gradient() {
 
@@ -27,7 +28,7 @@ export default function Gradient() {
 			}}
 			source={require("../../assets/gradient.png")}
 		/>
-		<DragCanvas bounds={canvasBoundary}></DragCanvas>
+		<DrawCanvas bounds={canvasBoundary}></DrawCanvas>
 	</>
 	)
 }
