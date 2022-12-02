@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { View } from 'react-native';
 import { Draggable } from '.';
 
-export function CustomDraggable({bounds, data}) {
+export function CustomDraggable({bounds, data, name}) {
 
     const predefinedSize = [70, 100, 150];
     const [draggableSize, setDraggableSize] = useState(predefinedSize[0]);
@@ -16,10 +16,6 @@ export function CustomDraggable({bounds, data}) {
         }
     }
 
-    useEffect(() => {
-        console.log(`CustomDraggable is called. ${JSON.stringify(data)}`);
-    }, [])
-
     return (
         <Draggable 
             x={bounds.width/2} y={bounds.height/2} 
@@ -31,6 +27,8 @@ export function CustomDraggable({bounds, data}) {
             maxX={bounds.x + bounds.width}
             maxY={bounds.y + bounds.height}
             onShortPressRelease={onResizeDraggable}
+            name={name}
+            key={`draggable-${name}`}
             /> 
     )
 }

@@ -15,7 +15,8 @@
     "react-native": "0.68.2",
     "react-native-gesture-handler": "^2.8.0",
     "react-native-reanimated": "^2.13.0",
-    "react-native-reanimated-carousel": "^3.1.5"
+    "react-native-reanimated-carousel": "^3.1.5",
+    "react-native-toast-message": "^2.1.5"
   },
   "devDependencies": {
     "@babel/core": "^7.20.2",

@@ -87,6 +87,7 @@ export function getToolbarActions(index, buttonSize) {
         action.buttonSize = buttonSize;
         action.margin = -10;
         action.color = 'transparent';
+        action.isShow = true;
         return action;
     });
 }

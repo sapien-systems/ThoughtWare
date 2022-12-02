@@ -15,6 +15,8 @@ import {
     StyleSheet,
 } from 'react-native';
 import PropTypes from 'prop-types';
+import customEvents from '../../hook/customEvents';
+import { TRY_REMOVE_DRAGGABLE } from '../../hook/customEventActions';
 
 function clamp(number, min, max) {
 	return Math.max(min, Math.min(number, max));
@@ -49,6 +51,7 @@ export default function Draggable(props) {
 		minY,
 		maxX,
 		maxY,
+		name	
 	} = props;
  
 	// The Animated object housing our xy value so that we can spring back
@@ -63,6 +66,7 @@ export default function Draggable(props) {
 	const isDragging = React.useRef(false);
 
 	const [isReverted, setIsReverted] = useState(false);
+	const [numReverted, setNumReverted] = useState(0);
 
 	const getBounds = React.useCallback(() => {
 		const left = x + offsetFromStart.current.x;
@@ -220,7 +224,7 @@ export default function Draggable(props) {
 			if (isReverted) {
 				return (
 					<Image
-						style={{ resizeMode:'contain', width: renderSize, height: renderSize, opacity:0.5}}
+						style={{ resizeMode:'contain', width: renderSize, height: renderSize, opacity:0.7}}
 						source={imageRevertSource}
 					/>
 				);
@@ -228,7 +232,7 @@ export default function Draggable(props) {
 			else {
 				return (
 					<Image
-						style={{resizeMode:'contain', width: renderSize, height: renderSize, opacity:0.5}}
+						style={{resizeMode:'contain', width: renderSize, height: renderSize, opacity:0.7}}
 						source={imageSource}
 					/>
 				);
@@ -236,7 +240,7 @@ export default function Draggable(props) {
 		} else if (imageSource) {
 			return (
 				<Image
-					style={{resizeMode:'contain', width: renderSize, height: renderSize, opacity:0.5}}
+					style={{resizeMode:'contain', width: renderSize, height: renderSize, opacity:0.7}}
 					source={imageSource}
 				/>
 			);
@@ -280,7 +284,13 @@ export default function Draggable(props) {
 	}, [maxX, maxY, minX, minY]);
 
 	const handleLongPress =(event) => {
+		if (numReverted % 2 == 1) {
+			customEvents.emit(TRY_REMOVE_DRAGGABLE, name);
+		}
+
+		setNumReverted(numReverted + 1);
 		setIsReverted(isReverted == true ? false : true);
+
 		onLongPress();
 	};
 
